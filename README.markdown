@@ -22,10 +22,11 @@ Please see the ```docs/``` and the ```tests/``` directory.
 
 ``` shell
 # change into php source files directory
+
 cd php-7.x.x
 
 # clone repository into php extension dir
-git clone https://github.com/johmue/php_excel -b php7 ext/excel
+git clone https://github.com/iliaal/php_excel.git -b php7 ext/excel
 
 # rebuild configure
 ./buildconf --force
@@ -37,7 +38,7 @@ git clone https://github.com/johmue/php_excel -b php7 ext/excel
 # on a 64-bit platform use
 ./configure --with-excel=shared --with-libxl-incdir=<PATH>/libxl-3.6.5.0/include_c --with-libxl-libdir=<PATH>/libxl-3.6.5.0/lib64
 ```
-
+ 
 ### Windows
 
 Pre-build packages for Windows can be downloaded [here](https://www.apachelounge.com/viewtopic.php?t=6617). To build the package for
@@ -52,7 +53,6 @@ Windows on your own you may want to visit this [project](https://github.com/johm
 
 ``` php
 <?php
-
 // init excel work book as xlsx
 $useXlsxFormat = true;
 $xlBook = new \ExcelBook('<YOUR_LICENSE_NAME>', '<YOUR_LICENSE_KEY>', $useXlsxFormat);

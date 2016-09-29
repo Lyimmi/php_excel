@@ -1,4 +1,8 @@
-[2015-??-??] - Version 1.0.2
+[2016-??-??] - Version 1.0.3dev
+	* Fixed crash when trying to read an empty file
+	* Added PECL package.xml to allow installation via pecl
+
+[2016-06-23] - Version 1.0.2
 	* Fixed bug in ExcelSheet::addPictureDim() (see issue #120)
 	* Fixed bug in ExcelSheet::isLicensed() (see issue #122)
 	* Added new methods (requires LibXL 3.6.2)
@@ -8,6 +12,8 @@
 		- ExcelBook::printRepeatRows()
 	* Added support for LibXL 3.6.3
 	* ExcelSheet::addPictureDim() & ExcelSheet::addPictureScaled() now support position parameters
+	* Includes official PHP7 release
+	* Added support for libxl compiled from source
 
 [2015-02-26] - Version 1.0.1
 	* Added methods

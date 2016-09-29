@@ -1,34 +1,37 @@
 --TEST--
-test Book::save() and Book::loadFile()
+force string behaviout with single quoted strings 
+--INI--
+date.timezone=America/Toronto
 --SKIPIF--
 <?php if (!extension_loaded("excel")) print "skip"; ?>
 --FILE--
-<?php
-
-$tmp_filename = dirname(__FILE__).'/test088.xls';
-
-$book = new ExcelBook();
-$sheet = $book->addSheet('Sheet1');
-$sheet->write(1, 1, 'foo');
-$book->save($tmp_filename);
-
-$book = new ExcelBook();
-$book->loadFile($tmp_filename);
-$sheet = $book->getSheet(0);
-
-var_dump($sheet->read(1, 1));
-
-echo 'OK';
-
-?>
---CLEAN--
-<?php
-$tmp_filename = dirname(__FILE__).'/test088.xls';
-
-if (is_file($tmp_filename)) {
-    unlink($tmp_filename);
-}
+<?php 
+    $xb = new ExcelBook(null, null, true);
+    $xb->setLocale('UTF-8');
+    $xs = new ExcelSheet($xb, 'test');
+    
+    var_dump($xs->write(1, 1, "'=3+4"));
+    var_dump($xs->write(1, 2, "'"));
+    var_dump($xs->write(1, 3, "'3"));
+    
+    var_dump($xs->isFormula(1, 1));
+    var_dump($xs->isFormula(1, 2));
+    var_dump($xs->isFormula(1, 3));
+    
+    var_dump($xs->read(1, 1));
+    var_dump($xs->read(1, 2));
+    var_dump($xs->read(1, 3));
+    
+	echo "OK\n";
 ?>
 --EXPECT--
-string(3) "foo"
+bool(true)
+bool(true)
+bool(true)
+bool(false)
+bool(false)
+bool(false)
+string(4) "=3+4"
+string(0) ""
+string(1) "3"
 OK
